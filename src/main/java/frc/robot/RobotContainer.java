@@ -52,11 +52,15 @@ public class RobotContainer {
     return io_drivecontroller.getLeftY();
     
   }
-
   public static double getRightSpeed() {
     return io_drivecontroller.getRightY();
   }
-
+  public static double getLeftSpeedX(){
+    return io_drivecontroller.getLeftX();
+  }
+  public static double getRightSpeedX(){
+    return io_drivecontroller.getRightX();
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

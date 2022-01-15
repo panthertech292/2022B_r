@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.DriveConstants;
 
@@ -25,20 +26,25 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonSRX FrontRightMotor;
   private final WPI_TalonSRX BackLeftMotor;
   private final WPI_TalonSRX BackRightMotor;
+  private final WPI_TalonSRX DeleteThisMotorPickup;
   private final MotorControllerGroup LeftSide;
   private final MotorControllerGroup RightSide;
   private final DifferentialDrive DifDrive;
   private double v_leftSpeed;
   private double v_rightSpeed;
+  private double v_xSpeed;
+  private double v_rotationSpeed;
   private int c_modeTeleop;
   private int v_driveMode;
   private int c_modeSetPoint;
+
   
   public DriveSubsystem() {
     FrontLeftMotor = new WPI_TalonSRX(DriveConstants.kFrontLeftMotor);
     FrontRightMotor = new WPI_TalonSRX(DriveConstants.kFrontRightMotor);
     BackLeftMotor = new WPI_TalonSRX(DriveConstants.kBackLeftMotor);
     BackRightMotor = new WPI_TalonSRX(DriveConstants.kBackRightMotor);
+    DeleteThisMotorPickup = new WPI_TalonSRX(40);
     LeftSide = new MotorControllerGroup(FrontLeftMotor, BackLeftMotor);
     RightSide = new MotorControllerGroup(FrontRightMotor, BackRightMotor);
     DifDrive = new DifferentialDrive(LeftSide,RightSide);
@@ -52,7 +58,12 @@ public class DriveSubsystem extends SubsystemBase {
     v_leftSpeed = -leftspeed;
     v_rightSpeed = rightspeed;
     DifDrive.tankDrive(v_leftSpeed,v_rightSpeed);
-  
+    
+  }
+  public void differentialDriveArcade(double xspeed, double rotation){
+    v_xSpeed = xspeed;
+    v_rotationSpeed = -rotation;
+    DifDrive.arcadeDrive(v_xSpeed, v_rotationSpeed);
   }
   public void driveModeTeleop(){
     v_driveMode = c_modeTeleop;
@@ -61,7 +72,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void driveTeleop() {
-    differentialDrive(RobotContainer.getLeftSpeed(), RobotContainer.getRightSpeed());
+    //differentialDrive(RobotContainer.getLeftSpeed(), RobotContainer.getRightSpeed());
+    differentialDriveArcade(RobotContainer.getLeftSpeedX(), RobotContainer.getRightSpeed());
   } 
 
 
@@ -69,5 +81,7 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     driveTeleop();
+    //DeleteThisMotorPickup.set(.40);
+
   }
 }

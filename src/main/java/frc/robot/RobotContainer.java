@@ -23,7 +23,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final static XboxController io_drivecontroller = new XboxController(Constants.kDriverController);
-  //private final static XboxController io_opercontroller = new XboxController(Constants.koperController);
+  private final static XboxController io_opercontroller = new XboxController(Constants.koperController);
 
   //Subsystems
   private final DriveSubsystem s_DriverSubsystem = new DriveSubsystem();

@@ -23,7 +23,14 @@ public final class Constants {
         public static final int kFrontRightMotor = 1;
         public static final int kBackLeftMotor = 4;
         public static final int kBackRightMotor = 3;
+     }
+    public static final class PickupConstant{
+        public static final int kPickupMotor = 9; // place holder value
+        public static final int kPickupMotorArm = 8; // place holder value
+    } 
 
-    
-    }
+
+
 }
+
+

@@ -14,8 +14,8 @@ package frc.robot;
  */
 public final class Constants {
     static final int kDriverController = 0;
-    static final int koperController = 1;
-
+    static final int kOperController = 1;
+    static final double kControllerDeadZone = 0.16;
 
     public static final class DriveConstants{
 

@@ -23,7 +23,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final static XboxController io_drivecontroller = new XboxController(Constants.kDriverController);
-  private final static XboxController io_opercontroller = new XboxController(Constants.koperController);
+  private final static XboxController io_opercontroller = new XboxController(Constants.kOperController);
 
   //Subsystems
   private final DriveSubsystem s_DriverSubsystem = new DriveSubsystem();
@@ -48,18 +48,26 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
   }
+  public static double deadZoneCheck(double rawControllerInput){
+    if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){
+      return rawControllerInput;
+    }
+    else{
+      return 0;
+    }
+  }
+
   public static double getLeftSpeed(){
-    return io_drivecontroller.getLeftY();
-    
+    return deadZoneCheck(io_drivecontroller.getLeftY());
   }
   public static double getRightSpeed() {
-    return io_drivecontroller.getRightY();
+    return deadZoneCheck(io_drivecontroller.getRightY());
   }
   public static double getLeftSpeedX(){
-    return io_drivecontroller.getLeftX();
+    return deadZoneCheck(io_drivecontroller.getLeftX());
   }
   public static double getRightSpeedX(){
-    return io_drivecontroller.getRightX();
+    return deadZoneCheck(io_drivecontroller.getRightX());
   }
 
   /**

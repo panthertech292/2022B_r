@@ -3,22 +3,20 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-//import com.kauailabs.navx.frc.AHRS;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SPI;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.DriveConstants;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+//Network & Shuffleboard
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.networktables.NetworkTableEntry;
+
+//Drive Imports
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new drive. */
@@ -26,62 +24,90 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonSRX FrontRightMotor;
   private final WPI_TalonSRX BackLeftMotor;
   private final WPI_TalonSRX BackRightMotor;
-  private final WPI_TalonSRX DeleteThisMotorPickup;
   private final MotorControllerGroup LeftSide;
   private final MotorControllerGroup RightSide;
   private final DifferentialDrive DifDrive;
   private double v_leftSpeed;
   private double v_rightSpeed;
-  private double v_xSpeed;
-  private double v_rotationSpeed;
-  private int c_modeTeleop;
-  private int v_driveMode;
-  private int c_modeSetPoint;
+  private double v_leftXSpeed;
+  private double v_rightYSpeed;
 
-  
+  private double v_setPointLeft;
+  private double v_setPointRight;
+  private boolean v_driveModeTeleop;
+  private boolean v_arcadeDrive;
+
+  //Network Tables
+  private NetworkTableEntry v_networkTableDriveMode;
+
   public DriveSubsystem() {
     FrontLeftMotor = new WPI_TalonSRX(DriveConstants.kFrontLeftMotor);
     FrontRightMotor = new WPI_TalonSRX(DriveConstants.kFrontRightMotor);
     BackLeftMotor = new WPI_TalonSRX(DriveConstants.kBackLeftMotor);
     BackRightMotor = new WPI_TalonSRX(DriveConstants.kBackRightMotor);
-    DeleteThisMotorPickup = new WPI_TalonSRX(40);
     LeftSide = new MotorControllerGroup(FrontLeftMotor, BackLeftMotor);
     RightSide = new MotorControllerGroup(FrontRightMotor, BackRightMotor);
     DifDrive = new DifferentialDrive(LeftSide,RightSide);
-    c_modeTeleop = 0;
-    c_modeSetPoint = 1;
-    v_driveMode = c_modeTeleop;
+
+    //Drive Modes
+    v_driveModeTeleop = true;
+    v_arcadeDrive = true;
+
+    //Netowrk Tables
+    ShuffleboardTab MainTab = Shuffleboard.getTab("Main Tab");
+    v_networkTableDriveMode = MainTab.add("Arcade Drive Enabled", v_arcadeDrive).withWidget(BuiltInWidgets.kToggleButton).getEntry();
   
   }
   
-  public void differentialDrive(double leftspeed, double rightspeed){
+  public void differentialTankDrive(double leftspeed, double rightspeed){
     v_leftSpeed = -leftspeed;
     v_rightSpeed = rightspeed;
     DifDrive.tankDrive(v_leftSpeed,v_rightSpeed);
-    
   }
-  public void differentialDriveArcade(double xspeed, double rotation){
-    v_xSpeed = xspeed;
-    v_rotationSpeed = -rotation;
-    DifDrive.arcadeDrive(v_xSpeed, v_rotationSpeed);
+  //Telop Drive
+  public void differentialArcadeDrive(double leftXspeed, double rightYspeed){
+    v_leftXSpeed = leftXspeed;
+    v_rightYSpeed = rightYspeed;
+    DifDrive.arcadeDrive(v_leftXSpeed, v_rightYSpeed);
   }
   public void driveModeTeleop(){
-    v_driveMode = c_modeTeleop;
-
-
+    v_driveModeTeleop = true;
+  }
+  public void driveTeleop() {
+    if(v_arcadeDrive == true){
+      differentialArcadeDrive(RobotContainer.getLeftSpeedX(), RobotContainer.getRightSpeed());
+    }
+    else{
+      differentialTankDrive((RobotContainer.getLeftSpeed()), RobotContainer.getRightSpeed());
+    }
   }
 
-  public void driveTeleop() {
-    //differentialDrive(RobotContainer.getLeftSpeed(), RobotContainer.getRightSpeed());
-    differentialDriveArcade(RobotContainer.getLeftSpeedX(), RobotContainer.getRightSpeed());
-  } 
-
+  //Auto
+  public void driveModePowerSetPoint() {
+    v_driveModeTeleop = false;
+  }
+  public void driveAuto() {
+    differentialTankDrive(-v_setPointLeft, -v_setPointRight);
+  }
+  //Shuffleboard Handler
+  public void updateShuffleBoard(){
+    v_arcadeDrive = v_networkTableDriveMode.getBoolean(true);
+  }
+  public void driveMain(){
+    if (v_driveModeTeleop == true){
+      driveTeleop();
+    }
+    else{
+      driveAuto();
+    }
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    driveTeleop();
-    //DeleteThisMotorPickup.set(.40);
+    driveMain();
 
+    //Update Shuffleboard(Maybe I should stop making useless comments like these?)
+    updateShuffleBoard();
   }
 }

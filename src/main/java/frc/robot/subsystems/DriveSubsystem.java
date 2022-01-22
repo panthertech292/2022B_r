@@ -67,7 +67,7 @@ public class DriveSubsystem extends SubsystemBase {
   //Telop Drive
   public void differentialArcadeDrive(double leftXspeed, double rightYspeed){
     v_leftXSpeed = leftXspeed;
-    v_rightYSpeed = rightYspeed;
+    v_rightYSpeed = -rightYspeed;
     DifDrive.arcadeDrive(v_leftXSpeed, v_rightYSpeed);
   }
   public void driveModeTeleop(){

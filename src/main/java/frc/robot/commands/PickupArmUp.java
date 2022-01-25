@@ -5,25 +5,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.PickupSubsysytem;
+import frc.robot.subsystems.PickupSubsystem;
 
-public class PickupRun extends CommandBase {
-  /** Creates a new PickupRun. */
-  public PickupRun() {
+public class PickupArmUp extends CommandBase {
+  private final PickupSubsystem PickupSubsystem;
+  /** Creates a new PickupArmUp. */
+  public PickupArmUp(PickupSubsystem s_PickupSubsystem) {
+    PickupSubsystem = s_PickupSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(s_PickupSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    PickupSubsystem.ChangePickupArmMotor(0);
+    PickupSubsystem.ChangePickupMotor(0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    PickupSubsystem.ChangePickupArmMotor(0);
+    PickupSubsystem.ChangePickupMotor(0);
+  }
 
   // Returns true when the command should end.
   @Override

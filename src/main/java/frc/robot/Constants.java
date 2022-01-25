@@ -25,8 +25,11 @@ public final class Constants {
         public static final int kBackRightMotor = 3;
      }
     public static final class PickupConstant{
+        //Motors
         public static final int kPickupMotor = 9; // place holder value
         public static final int kPickupMotorArm = 8; // place holder value
+        //Encoders & Switches
+        public static final int kPickupArmUpSwitch = 0; //DIO - place holder value
     } 
 
 

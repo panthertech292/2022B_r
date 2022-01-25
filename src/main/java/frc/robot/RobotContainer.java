@@ -11,8 +11,7 @@ import frc.robot.commands.*;
 
 //Subsystems
 import frc.robot.subsystems.DriveSubsystem;
-
-
+import frc.robot.subsystems.PickupSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,16 +26,22 @@ public class RobotContainer {
 
   //Subsystems
   private final DriveSubsystem s_DriverSubsystem = new DriveSubsystem();
+  private final PickupSubsystem s_PickupSubsystem = new PickupSubsystem();
 
 
   //Drive Commands
   private final Command z_DriveTeleop = new DriveTeleop(s_DriverSubsystem); 
 
+  //Pickup Commands
+  private final Command z_PickupArmUp = new PickupArmUp(s_PickupSubsystem);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    //Set Defualt Commands
     s_DriverSubsystem.setDefaultCommand(z_DriveTeleop);
+    s_PickupSubsystem.setDefaultCommand(z_PickupArmUp);
   }
 
   /**

@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 
 //Subsystems
@@ -21,7 +23,7 @@ import frc.robot.subsystems.PickupSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final static XboxController io_drivecontroller = new XboxController(Constants.kDriverController);
+  private final static XboxController io_drivercontroller = new XboxController(Constants.kDriverController);
   private final static XboxController io_opercontroller = new XboxController(Constants.kOperController);
 
   //Subsystems
@@ -34,6 +36,7 @@ public class RobotContainer {
 
   //Pickup Commands
   private final Command z_PickupArmUp = new PickupArmUp(s_PickupSubsystem);
+  private final Command z_PickupArmDown = new PickupArmDown(s_PickupSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,7 +54,23 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Driver Controller
+    final JoystickButton d_aButton = new JoystickButton(io_drivercontroller, Button.kA.value);
+    final JoystickButton d_bButton = new JoystickButton(io_drivercontroller, Button.kB.value);
+    final JoystickButton d_xButton = new JoystickButton(io_drivercontroller, Button.kX.value);
+    final JoystickButton d_startButton = new JoystickButton(io_drivercontroller, Button.kStart.value);
+    final JoystickButton d_backButton = new JoystickButton(io_drivercontroller, Button.kBack.value);
+    final JoystickButton d_yButton = new JoystickButton(io_drivercontroller, Button.kY.value);
 
+    //Operator Controller
+    final JoystickButton o_aButton = new JoystickButton(io_opercontroller, Button.kA.value);
+    final JoystickButton o_bButton = new JoystickButton(io_opercontroller, Button.kB.value);
+    final JoystickButton o_xButton = new JoystickButton(io_opercontroller, Button.kX.value);
+    final JoystickButton o_yButton = new JoystickButton(io_opercontroller, Button.kY.value);
+    final JoystickButton o_startButton = new JoystickButton(io_opercontroller, Button.kStart.value);
+    final JoystickButton o_backButton = new JoystickButton(io_opercontroller, Button.kBack.value);
+
+    d_aButton.toggleWhenPressed(z_PickupArmDown);
   }
   public static double deadZoneCheck(double rawControllerInput){
     if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){
@@ -63,16 +82,16 @@ public class RobotContainer {
   }
 
   public static double getLeftSpeed(){
-    return deadZoneCheck(io_drivecontroller.getLeftY());
+    return deadZoneCheck(io_drivercontroller.getLeftY());
   }
   public static double getRightSpeed() {
-    return deadZoneCheck(io_drivecontroller.getRightY());
+    return deadZoneCheck(io_drivercontroller.getRightY());
   }
   public static double getLeftSpeedX(){
-    return deadZoneCheck(io_drivecontroller.getLeftX());
+    return deadZoneCheck(io_drivercontroller.getLeftX());
   }
   public static double getRightSpeedX(){
-    return deadZoneCheck(io_drivecontroller.getRightX());
+    return deadZoneCheck(io_drivercontroller.getRightX());
   }
 
   /**

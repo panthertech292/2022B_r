@@ -34,13 +34,18 @@ public class PickupSubsystem extends SubsystemBase {
   }
   //Motors
   public void ChangePickupMotor(double pickupspeed) {
-    v_pickupSpeed = -pickupspeed;
+    v_pickupSpeed = pickupspeed;
   }
   public void ChangePickupArmMotor(double armpickupspeed){
     v_pickupSpeedArm = armpickupspeed;
   }
   //Encoder & Limit Switches
-  public double getArmEncoder(){ //This is a placeholder function, don't know what Encoder they are using
+  public double getArmEncoderVelocity(){ //This is a placeholder function, don't know what Encoder they are using
+    //return pickupMotorArmEncoder.getVelocity();
+    return 0;
+  }
+  public double getArmEncoderPosition(){
+    //return pickupMotorArmEncoder.getPosition();
     return 0;
   }
   public boolean getArmUpLimitSwitch(){
@@ -50,7 +55,7 @@ public class PickupSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //pickupMotor.set(v_pickupSpeed);
+    pickupMotor.set(v_pickupSpeed);
     //pickupMotorArm.set(v_pickupSpeedArm);
   }
 }

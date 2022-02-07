@@ -70,12 +70,15 @@ public class DriveSubsystem extends SubsystemBase {
     v_rightYSpeed = -rightYspeed;
     DifDrive.arcadeDrive(v_leftXSpeed, v_rightYSpeed);
   }
+  //public void driveModeTeleop(){
+  //  v_driveModeTeleop = true;
+  //}
   public void driveTeleop() {
     if(v_arcadeDrive == true){
-      differentialArcadeDrive(RobotContainer.getDriverLeftSpeedX(), RobotContainer.getDriverRightSpeed());
+      differentialArcadeDrive(RobotContainer.getLeftSpeedX(), RobotContainer.getRightSpeed());
     }
     else{
-      differentialTankDrive((RobotContainer.getDriverLeftSpeed()), RobotContainer.getDriverRightSpeed());
+      differentialTankDrive((RobotContainer.getLeftSpeed()), RobotContainer.getRightSpeed());
     }
   }
 

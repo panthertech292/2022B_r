@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.PickupConstants;
+import frc.robot.Constants.PickupConstant;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -25,12 +25,12 @@ public class PickupSubsystem extends SubsystemBase {
 
   public PickupSubsystem() {
     //Motors
-    pickupMotor = new WPI_TalonSRX(PickupConstants.kPickupMotor);
-    pickupMotorArm = new WPI_TalonSRX(PickupConstants.kPickupMotorArm);
+    pickupMotor = new WPI_TalonSRX(PickupConstant.kPickupMotor);
+    pickupMotorArm = new WPI_TalonSRX(PickupConstant.kPickupMotorArm);
     pickupMotor.setNeutralMode(NeutralMode.Brake);
 
     //Encoders & Switches
-    upArmSwitch = new DigitalInput(PickupConstants.kPickupArmUpSwitch);
+    upArmSwitch = new DigitalInput(PickupConstant.kPickupArmUpSwitch);
   }
   //Motors
   public void ChangePickupMotor(double pickupspeed) {
@@ -55,7 +55,6 @@ public class PickupSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //FIX THIS, THIS IS BAD!
     pickupMotor.set(v_pickupSpeed);
     //pickupMotorArm.set(v_pickupSpeedArm);
   }

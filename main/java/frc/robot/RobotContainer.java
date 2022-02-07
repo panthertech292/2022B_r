@@ -13,7 +13,6 @@ import frc.robot.commands.*;
 
 //Subsystems
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.PickupSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -31,7 +30,7 @@ public class RobotContainer {
   //Subsystems
   private final DriveSubsystem s_DriverSubsystem = new DriveSubsystem();
   private final PickupSubsystem s_PickupSubsystem = new PickupSubsystem();
-  private final LiftSubsystem s_LiftSubsystem = new LiftSubsystem();
+  private final ShooterSubsystem s_ShooterSubsystem = new ShooterSubsystem();
 
   //Drive Commands
   private final Command z_DriveTeleop = new DriveTeleop(s_DriverSubsystem); 
@@ -40,10 +39,8 @@ public class RobotContainer {
   private final Command z_PickupArmUp = new PickupArmUp(s_PickupSubsystem);
   private final Command z_PickupArmDown = new PickupArmDown(s_PickupSubsystem);
 
-  //Lift Commands
-  private final Command z_LiftExtend = new LiftExtend(s_LiftSubsystem);
-  private final Command z_LiftRetract = new LiftRetract(s_LiftSubsystem);
-  private final Command z_LiftRotate = new LiftRotate(s_LiftSubsystem);
+  //Shooter Commands
+  private final Command z_RunTestMotor1 = new RunTestMotor1(s_ShooterSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,7 +49,6 @@ public class RobotContainer {
     //Set Defualt Commands
     s_DriverSubsystem.setDefaultCommand(z_DriveTeleop);
     s_PickupSubsystem.setDefaultCommand(z_PickupArmUp);
-    s_LiftSubsystem.setDefaultCommand(z_LiftRotate);
   }
 
   /**
@@ -66,9 +62,9 @@ public class RobotContainer {
     final JoystickButton d_aButton = new JoystickButton(io_drivercontroller, Button.kA.value);
     final JoystickButton d_bButton = new JoystickButton(io_drivercontroller, Button.kB.value);
     final JoystickButton d_xButton = new JoystickButton(io_drivercontroller, Button.kX.value);
-    final JoystickButton d_yButton = new JoystickButton(io_drivercontroller, Button.kY.value);
     final JoystickButton d_startButton = new JoystickButton(io_drivercontroller, Button.kStart.value);
     final JoystickButton d_backButton = new JoystickButton(io_drivercontroller, Button.kBack.value);
+    final JoystickButton d_yButton = new JoystickButton(io_drivercontroller, Button.kY.value);
 
     //Operator Controller
     final JoystickButton o_aButton = new JoystickButton(io_opercontroller, Button.kA.value);
@@ -77,15 +73,9 @@ public class RobotContainer {
     final JoystickButton o_yButton = new JoystickButton(io_opercontroller, Button.kY.value);
     final JoystickButton o_startButton = new JoystickButton(io_opercontroller, Button.kStart.value);
     final JoystickButton o_backButton = new JoystickButton(io_opercontroller, Button.kBack.value);
-    final JoystickButton o_leftBumper = new JoystickButton(io_opercontroller, Button.kLeftBumper.value);
-    final JoystickButton o_rightBumper = new JoystickButton(io_opercontroller, Button.kRightBumper.value);
 
-    //Driver Controller Binds
-    d_aButton.toggleWhenPressed(z_PickupArmDown);
-
-    //Operator Controller Binds
-    o_leftBumper.whileHeld(z_LiftRetract);
-    o_rightBumper.whileHeld(z_LiftExtend);
+    d_bButton.toggleWhenPressed(z_PickupArmDown);
+    d_aButton.toggleWhenPressed(z_RunTestMotor1);
   }
   public static double deadZoneCheck(double rawControllerInput){
     if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){
@@ -96,20 +86,17 @@ public class RobotContainer {
     }
   }
 
-  public static double getDriverLeftSpeed(){
+  public static double getLeftSpeed(){
     return deadZoneCheck(io_drivercontroller.getLeftY());
   }
-  public static double getDriverRightSpeed() {
+  public static double getRightSpeed() {
     return deadZoneCheck(io_drivercontroller.getRightY());
   }
-  public static double getDriverLeftSpeedX(){
+  public static double getLeftSpeedX(){
     return deadZoneCheck(io_drivercontroller.getLeftX());
   }
-  public static double getDriverRightSpeedX(){
+  public static double getRightSpeedX(){
     return deadZoneCheck(io_drivercontroller.getRightX());
-  }
-  public static double getOperRightSpeedY(){
-    return deadZoneCheck(io_opercontroller.getRightY());
   }
 
   /**

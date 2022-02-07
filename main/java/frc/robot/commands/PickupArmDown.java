@@ -5,34 +5,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.Constants.PickupConstant;
+import frc.robot.subsystems.PickupSubsystem;
 
-public class LiftRotate extends CommandBase {
-  private final LiftSubsystem LiftSubsystem;
-  /** Creates a new LiftRotate. */
-  public LiftRotate(LiftSubsystem s_LiftSubsystem) {
-    LiftSubsystem = s_LiftSubsystem;
+public class PickupArmDown extends CommandBase {
+  private final PickupSubsystem PickupSubsystem;
+  /** Creates a new PickupArmUp. */
+  public PickupArmDown(PickupSubsystem s_PickupSubsystem) {
+    PickupSubsystem = s_PickupSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(s_LiftSubsystem);
+    addRequirements(s_PickupSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    LiftSubsystem.setRotationArmMotor(0);
+    PickupSubsystem.ChangePickupArmMotor(0);
+    PickupSubsystem.ChangePickupMotor(PickupConstant.kPickupMotorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY());
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    LiftSubsystem.setRotationArmMotor(0);
+    PickupSubsystem.ChangePickupArmMotor(0);
+    PickupSubsystem.ChangePickupMotor(0);
   }
 
   // Returns true when the command should end.

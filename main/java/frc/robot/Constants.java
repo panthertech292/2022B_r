@@ -24,7 +24,7 @@ public final class Constants {
         public static final int kBackLeftMotor = 4;
         public static final int kBackRightMotor = 3;
     }
-    public static final class PickupConstants{
+    public static final class PickupConstant{
         //Motors
         public static final int kPickupMotor = 9; // place holder value
         public static final int kPickupMotorArm = 8; // place holder value
@@ -33,19 +33,6 @@ public final class Constants {
         //Speeds
         public static final double kPickupMotorSpeed = 0.52;
     } 
-    public static final class ShooterConstants{
-        //add stuff here
-    }
-    public static final class LiftConstants{
-        //Motors
-        public static final int kRotationArmMotor = 10; // place holder value
-        public static final int kLeftArmMotor = 11;
-        public static final int kRightArmMotor = 12;
-        
-        //Speeds
-        public static final double kArmExtendSpeed = 0.4;
-        public static final double kArmRetractSpeed = -0.4;
-    }
 
 
 

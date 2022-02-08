@@ -14,8 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class PickupSubsystem extends SubsystemBase {
   /** Creates a new PickupSubsystem. */
   //Motors
-  private final WPI_TalonSRX pickupMotor;
-  private final WPI_TalonSRX pickupMotorArm;
+  private final WPI_TalonSRX PickupMotor;
+  private final WPI_TalonSRX PickupMotorArm;
 
   //Encoders & Switches
   private DigitalInput upArmSwitch;
@@ -25,19 +25,21 @@ public class PickupSubsystem extends SubsystemBase {
 
   public PickupSubsystem() {
     //Motors
-    pickupMotor = new WPI_TalonSRX(PickupConstants.kPickupMotor);
-    pickupMotorArm = new WPI_TalonSRX(PickupConstants.kPickupMotorArm);
-    pickupMotor.setNeutralMode(NeutralMode.Brake);
+    PickupMotor = new WPI_TalonSRX(PickupConstants.kPickupMotor);
+    PickupMotorArm = new WPI_TalonSRX(PickupConstants.kPickupMotorArm);
+    PickupMotor.setNeutralMode(NeutralMode.Brake);
 
     //Encoders & Switches
     upArmSwitch = new DigitalInput(PickupConstants.kPickupArmUpSwitch);
   }
   //Motors
-  public void ChangePickupMotor(double pickupspeed) {
+  public void setPickupMotorSpeed(double pickupspeed) {
     v_pickupSpeed = pickupspeed;
+    PickupMotor.set(v_pickupSpeed);
   }
-  public void ChangePickupArmMotor(double armpickupspeed){
+  public void setPickupArmMotorSpeed(double armpickupspeed){
     v_pickupSpeedArm = armpickupspeed;
+    PickupMotorArm.set(v_pickupSpeedArm);
   }
   //Encoder & Limit Switches
   public double getArmEncoderVelocity(){ //This is a placeholder function, don't know what Encoder they are using
@@ -55,8 +57,5 @@ public class PickupSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //FIX THIS, THIS IS BAD!
-    pickupMotor.set(v_pickupSpeed);
-    //pickupMotorArm.set(v_pickupSpeedArm);
   }
 }

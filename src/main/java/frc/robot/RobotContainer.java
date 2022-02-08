@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.*;
 
 //Subsystems
@@ -31,6 +32,7 @@ public class RobotContainer {
   //Subsystems
   private final DriveSubsystem s_DriverSubsystem = new DriveSubsystem();
   private final PickupSubsystem s_PickupSubsystem = new PickupSubsystem();
+  private final ShooterSubsystem s_ShooterSubsystem = new ShooterSubsystem();
   private final LiftSubsystem s_LiftSubsystem = new LiftSubsystem();
 
   //Drive Commands
@@ -39,6 +41,9 @@ public class RobotContainer {
   //Pickup Commands
   private final Command z_PickupArmUp = new PickupArmUp(s_PickupSubsystem);
   private final Command z_PickupArmDown = new PickupArmDown(s_PickupSubsystem);
+
+  //Shooter Commands
+  private final Command z_RunShooter = new RunShooter(s_ShooterSubsystem, ShooterConstants.kShooterLowSpeed, ShooterConstants.kShooterHighSpeed);
 
   //Lift Commands
   private final Command z_LiftExtend = new LiftExtend(s_LiftSubsystem);
@@ -86,7 +91,7 @@ public class RobotContainer {
     //Operator Controller Binds
     o_leftBumper.whileHeld(z_LiftRetract);
     o_rightBumper.whileHeld(z_LiftExtend);
-    
+    o_aButton.whileHeld(z_RunShooter);
   }
   public static double deadZoneCheck(double rawControllerInput){
     if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){

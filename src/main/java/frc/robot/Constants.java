@@ -34,7 +34,13 @@ public final class Constants {
         public static final double kPickupMotorSpeed = 0.52;
     } 
     public static final class ShooterConstants{
-        //add stuff here
+        //Motors
+        public static final int kShooterMotorLow = 11; // place holder value
+        public static final int kShooterMotorHigh = 12; // place holder value
+
+        //Speeds
+        public static final double kShooterLowSpeed = 0.5; // place holder value
+        public static final double kShooterHighSpeed = 0.5; // place holder value
     }
     public static final class LiftConstants{
         //Motors

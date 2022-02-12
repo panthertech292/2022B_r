@@ -15,7 +15,7 @@ package frc.robot;
 public final class Constants {
     static final int kDriverController = 0;
     static final int kOperController = 1;
-    static final double kControllerDeadZone = 0.16;
+    static final double kControllerDeadZone = 0.18;
 
     public static final class DriveConstants{
 
@@ -31,12 +31,12 @@ public final class Constants {
         //Encoders & Switches
         public static final int kPickupArmUpSwitch = 0; //DIO - place holder value
         //Speeds
-        public static final double kPickupMotorSpeed = 0.52;
+        public static final double kPickupMotorSpeed = 0.45;
     } 
     public static final class ShooterConstants{
         //Motors
-        public static final int kShooterMotorLow = 11; // place holder value
-        public static final int kShooterMotorHigh = 12; // place holder value
+        public static final int kShooterMotorLow = 44; // place holder value
+        public static final int kShooterMotorHigh = 25; // place holder value
 
         //Speeds
         public static final double kShooterLowSpeed = 0.5; // place holder value
@@ -44,13 +44,13 @@ public final class Constants {
     }
     public static final class LiftConstants{
         //Motors
-        public static final int kRotationArmMotor = 10; // place holder value
-        public static final int kLeftArmMotor = 11;
-        public static final int kRightArmMotor = 12;
+        public static final int kRotationArmMotor = 21; // place holder value
+        public static final int kLeftArmMotor = 20;
+        public static final int kRightArmMotor = 22;
         
         //Speeds
-        public static final double kArmExtendSpeed = 0.4;
-        public static final double kArmRetractSpeed = -0.4;
+        public static final double kArmExtendSpeed = 0.2;
+        public static final double kArmRetractSpeed = -0.2;
     }
 
 

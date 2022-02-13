@@ -39,7 +39,7 @@ public class PickupSubsystem extends SubsystemBase {
   }
   public void setPickupArmMotorSpeed(double armpickupspeed){
     v_pickupSpeedArm = armpickupspeed;
-    PickupMotorArm.set(v_pickupSpeedArm);
+    //PickupMotorArm.set(v_pickupSpeedArm);
   }
   //Encoder & Limit Switches
   public double getArmEncoderVelocity(){ //This is a placeholder function, don't know what Encoder they are using

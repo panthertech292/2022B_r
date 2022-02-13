@@ -11,7 +11,7 @@ import frc.robot.Constants.ShooterConstants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-//Senors & Encoders
+//Sensors & Encoders
 import com.revrobotics.RelativeEncoder;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -19,7 +19,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax ShooterMotorLow;
   private final CANSparkMax ShooterMotorHigh;
 
-  //Senors & Encoders
+  //Sensors & Encoders
   private RelativeEncoder ShooterMotorLowEncoder;
   private RelativeEncoder ShooterMotorHighEncoder;
 

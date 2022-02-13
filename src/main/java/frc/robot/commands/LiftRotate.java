@@ -26,7 +26,21 @@ public class LiftRotate extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY()*.2);
+    /*if (LiftSubsystem.getRotationArmRPM() < 80 && LiftSubsystem.getRotationArmRPM() > -80){
+      //Run with more power because we are slow
+      LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY());
+      System.out.println("Fast running @" + RobotContainer.getOperRightSpeedY());
+    }
+    else{
+      //Run slower with less power
+      LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY()*0.1);
+      System.out.println("Slow running @" + RobotContainer.getOperRightSpeedY()*0.1);
+    }
+    */
+
+    
+    
+    LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY());
   }
 
   // Called once the command ends or is interrupted.

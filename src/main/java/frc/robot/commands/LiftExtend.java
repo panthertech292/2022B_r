@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.LiftConstants;
 import frc.robot.subsystems.LiftSubsystem;
 
@@ -21,18 +22,21 @@ public class LiftExtend extends CommandBase {
   @Override
   public void initialize() {
     LiftSubsystem.setBothArmMotors(LiftConstants.kArmExtendSpeed);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     LiftSubsystem.setBothArmMotors(LiftConstants.kArmExtendSpeed);
+    //LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     LiftSubsystem.setBothArmMotors(0);
+    //LiftSubsystem.setRotationArmMotor(0);
   }
 
   // Returns true when the command should end.

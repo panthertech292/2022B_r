@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.LiftConstants;
 import frc.robot.subsystems.LiftSubsystem;
 
@@ -27,12 +28,14 @@ public class LiftRetract extends CommandBase {
   @Override
   public void execute() {
     LiftSubsystem.setBothArmMotors(LiftConstants.kArmRetractSpeed);
+    //LiftSubsystem.setRotationArmMotor(RobotContainer.getOperRightSpeedY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     LiftSubsystem.setBothArmMotors(0);
+    //LiftSubsystem.setRotationArmMotor(0);
   }
 
   // Returns true when the command should end.

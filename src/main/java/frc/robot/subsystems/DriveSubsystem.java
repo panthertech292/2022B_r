@@ -34,7 +34,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   private double v_setPointLeft;
   private double v_setPointRight;
-  private boolean v_driveModeTeleop;
   private boolean v_arcadeDrive;
 
   //Network Tables
@@ -50,7 +49,6 @@ public class DriveSubsystem extends SubsystemBase {
     DifDrive = new DifferentialDrive(LeftSide,RightSide);
 
     //Drive Modes
-    v_driveModeTeleop = true;
     v_arcadeDrive = true;
 
     //Netowrk Tables
@@ -78,11 +76,6 @@ public class DriveSubsystem extends SubsystemBase {
       differentialTankDrive((RobotContainer.getDriverLeftSpeed()), RobotContainer.getDriverRightSpeed());
     }
   }
-
-  //Auto
-  //public void driveModePowerSetPoint() {
-  //  v_driveModeTeleop = false;
-  //}
   public void driveAuto() {
     differentialTankDrive(-v_setPointLeft, -v_setPointRight);
   }
@@ -90,14 +83,6 @@ public class DriveSubsystem extends SubsystemBase {
   public void updateShuffleBoard(){
     v_arcadeDrive = v_networkTableDriveMode.getBoolean(true);
   }
-  //public void driveMain(){
-  //  if (v_driveModeTeleop == true){
-  //    driveTeleop();
-  //  }
-  //  else{
-  //    driveAuto();
-  //  }
-  //}
 
   @Override
   public void periodic() {

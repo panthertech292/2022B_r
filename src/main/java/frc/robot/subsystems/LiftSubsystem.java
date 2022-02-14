@@ -21,10 +21,6 @@ public class LiftSubsystem extends SubsystemBase {
   private final CANSparkMax LeftArmMotor;
   private final CANSparkMax RightArmMotor;
 
-  //Sensors & Encoders
-  //private RelativeEncoder RotationArmMotorEncoder;
-  //private Encoder RotationArmMotorEncoder;
-
   //Variables
   private double v_rotationSpeed;
   private double v_armSpeed;
@@ -36,9 +32,6 @@ public class LiftSubsystem extends SubsystemBase {
     LeftArmMotor = new CANSparkMax(LiftConstants.kLeftArmMotor, MotorType.kBrushless);
     RightArmMotor = new CANSparkMax(LiftConstants.kRightArmMotor, MotorType.kBrushless);
 
-    //Sensors
-    //RotationArmMotorEncoder = RotationArmMotor.getEncoder();
-    //RotationArmMotorEncoder = new Encoder(8, 9);
   }
   public void setRotationArmMotor(double rotationspeed){
     v_rotationSpeed = rotationspeed;
@@ -49,15 +42,9 @@ public class LiftSubsystem extends SubsystemBase {
     LeftArmMotor.set(v_armSpeed);
     RightArmMotor.set(v_armSpeed);
   }
-  public double getRotationArmRPM(){
-    //return RotationArmMotorEncoder.getVelocity();
-    return 0;
-  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //System.out.println("Rotation Arm RPM: " + getRotationArmRPM());
-    //System.out.println(RotationArmMotor.get());
   }
 }

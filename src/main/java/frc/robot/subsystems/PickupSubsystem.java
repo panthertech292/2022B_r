@@ -15,7 +15,7 @@ public class PickupSubsystem extends SubsystemBase {
   /** Creates a new PickupSubsystem. */
   //Motors
   private final WPI_TalonSRX PickupMotor;
-  private final WPI_TalonSRX PickupMotorArm;
+  //private final WPI_TalonSRX PickupMotorArm;
 
   //Encoders & Switches
   private DigitalInput upArmSwitch;
@@ -26,7 +26,7 @@ public class PickupSubsystem extends SubsystemBase {
   public PickupSubsystem() {
     //Motors
     PickupMotor = new WPI_TalonSRX(PickupConstants.kPickupMotor);
-    PickupMotorArm = new WPI_TalonSRX(PickupConstants.kPickupMotorArm);
+    //PickupMotorArm = new WPI_TalonSRX(PickupConstants.kPickupMotorArm);
     PickupMotor.setNeutralMode(NeutralMode.Brake);
 
     //Encoders & Switches

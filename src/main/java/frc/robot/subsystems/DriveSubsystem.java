@@ -76,6 +76,9 @@ public class DriveSubsystem extends SubsystemBase {
       differentialTankDrive((RobotContainer.getDriverLeftSpeed()), RobotContainer.getDriverRightSpeed());
     }
   }
+  public void newDriveTeleop(double LeftX,double RightY){
+    differentialArcadeDrive(LeftX, RightY);
+  }
   public void driveAuto() {
     differentialTankDrive(-v_setPointLeft, -v_setPointRight);
   }

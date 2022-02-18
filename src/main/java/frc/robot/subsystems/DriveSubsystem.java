@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 //Network & Shuffleboard
@@ -68,7 +67,8 @@ public class DriveSubsystem extends SubsystemBase {
     v_rightYSpeed = -rightYspeed;
     DifDrive.arcadeDrive(v_leftXSpeed, v_rightYSpeed);
   }
-  public void driveTeleop() {
+  /*
+  public void driveTeleop(double driverLeftX, double driverLeftY, double driverRightX, double driverRightY) {
     if(v_arcadeDrive == true){
       differentialArcadeDrive(RobotContainer.getDriverLeftSpeedX(), RobotContainer.getDriverRightSpeed());
     }
@@ -76,23 +76,30 @@ public class DriveSubsystem extends SubsystemBase {
       differentialTankDrive((RobotContainer.getDriverLeftSpeed()), RobotContainer.getDriverRightSpeed());
     }
   }
-  public void newDriveTeleop(double LeftX,double RightY){
-    differentialArcadeDrive(LeftX, RightY);
+  */
+  public void driveTeleopArcade(double driverLeftX, double driverRightY){
+    differentialArcadeDrive(driverLeftX, driverRightY);
+  }
+  public void driveTeleopTank(double driverLeftY, double driverRightY){
+    differentialTankDrive(driverLeftY, driverRightY);
   }
   public void driveAuto() {
     differentialTankDrive(-v_setPointLeft, -v_setPointRight);
   }
   //Shuffleboard Handler
-  public void updateShuffleBoard(){
-    v_arcadeDrive = v_networkTableDriveMode.getBoolean(true);
+  //public void updateShuffleBoard(){
+  //  v_arcadeDrive = v_networkTableDriveMode.getBoolean(true);
+  //}
+  //This is untested on an actual robot, and needs to be demoed IRL
+  public boolean isDriveModeArcade(){
+    return v_networkTableDriveMode.getBoolean(true);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //driveMain();
 
     //Update Shuffleboard(Maybe I should stop making useless comments like these?)
-    updateShuffleBoard();
+    //updateShuffleBoard();
   }
 }

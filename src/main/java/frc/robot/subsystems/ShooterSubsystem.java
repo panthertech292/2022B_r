@@ -33,6 +33,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //Motors
     ShooterMotorLow = new CANSparkMax(ShooterConstants.kShooterMotorLow, MotorType.kBrushless);
     ShooterMotorHigh = new CANSparkMax(ShooterConstants.kShooterMotorHigh, MotorType.kBrushless);
+    ShooterMotorLow.setInverted(true);
 
     //Sensors & Encoders
     ShooterMotorLowEncoder = ShooterMotorLow.getEncoder();
@@ -41,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Motors
   public void setShooterMotorLowSpeed(double lowshooterspeed){
-    v_lowShooterSpeed = -lowshooterspeed;
+    v_lowShooterSpeed = lowshooterspeed;
     ShooterMotorLow.set(v_lowShooterSpeed);
   }
   public void setShooterMotorHighSpeed(double highshooterspeed){

@@ -31,7 +31,7 @@ public final class Constants {
         //Encoders & Switches
         public static final int kPickupArmUpSwitch = 0; //DIO - place holder value
         //Speeds
-        public static final double kPickupMotorSpeed = 0.475;
+        public static final double kPickupMotorSpeed = 0.4;
     } 
     public static final class ShooterConstants{
         //Motors
@@ -39,8 +39,8 @@ public final class Constants {
         public static final int kShooterMotorHigh = 44; 
 
         //Speeds
-        public static final double kShooterLowSpeed = 0.50; // place holder value
-        public static final double kShooterHighSpeed = 0.50; // place holder value
+        public static final double kShooterLowSpeed = 0.22; // place holder value
+        public static final double kShooterHighSpeed = 0.09; // place holder value
     }
     public static final class LiftConstants{
         //Motors

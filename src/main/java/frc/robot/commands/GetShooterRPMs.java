@@ -13,6 +13,7 @@ public class GetShooterRPMs extends CommandBase {
   private double v_shooterLowSpeed;
   private double v_shooterHighSpeed;
   private int v_counter;
+  private int v_matchRPMCounter;
   /** Creates a new GetShooterRPMs. */
   public GetShooterRPMs(ShooterSubsystem s_ShooterSubsystem) {
     ShooterSubsystem = s_ShooterSubsystem;
@@ -31,7 +32,11 @@ public class GetShooterRPMs extends CommandBase {
   @Override
   public void execute() {
     for (v_counter = 0; v_counter < 101; v_counter = v_counter + 1){
-      System.out.println("Testing shooter RPM @: "+ v_counter*.01);
+      for (v_matchRPMCounter = 0; v_matchRPMCounter < 5;){
+        if(ShooterSubsystem.getShooterMotorLowEncoderVelocity() == 0){ //0 Needs to be replaced with actual logic for when the RPMS match
+          System.out.println("Running At: " + v_counter*.01 + "With RPM @ " + ShooterSubsystem.getShooterMotorLowEncoderVelocity());
+        }
+      }
     }
 
 

@@ -35,8 +35,8 @@ public final class Constants {
     } 
     public static final class ShooterConstants{
         //Motors
-        public static final int kShooterMotorLow = 44; // place holder value
-        public static final int kShooterMotorHigh = 25; // place holder value
+        public static final int kShooterMotorLow = 25; // place holder value
+        public static final int kShooterMotorHigh = 44; // place holder value
 
         //Speeds
         public static final double kShooterLowSpeed = 0.5; // place holder value
@@ -51,6 +51,11 @@ public final class Constants {
         //Speeds
         public static final double kArmExtendSpeed = 0.5;
         public static final double kArmRetractSpeed = -0.40;
+    }
+    public static final class LiftBallConstants{
+        //Motors
+        public static final int kLiftBallHighMotor = 30; //place holder value
+        public static final int kLiftBallLowMotor = 31; //place holder value
     }
 
 

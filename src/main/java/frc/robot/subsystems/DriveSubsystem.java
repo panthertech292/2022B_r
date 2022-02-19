@@ -67,16 +67,6 @@ public class DriveSubsystem extends SubsystemBase {
     v_rightYSpeed = -rightYspeed;
     DifDrive.arcadeDrive(v_leftXSpeed, v_rightYSpeed);
   }
-  /*
-  public void driveTeleop(double driverLeftX, double driverLeftY, double driverRightX, double driverRightY) {
-    if(v_arcadeDrive == true){
-      differentialArcadeDrive(RobotContainer.getDriverLeftSpeedX(), RobotContainer.getDriverRightSpeed());
-    }
-    else{
-      differentialTankDrive((RobotContainer.getDriverLeftSpeed()), RobotContainer.getDriverRightSpeed());
-    }
-  }
-  */
   public void driveTeleopArcade(double driverLeftX, double driverRightY){
     differentialArcadeDrive(driverLeftX, driverRightY);
   }
@@ -87,10 +77,6 @@ public class DriveSubsystem extends SubsystemBase {
     differentialTankDrive(-v_setPointLeft, -v_setPointRight);
   }
   //Shuffleboard Handler
-  //public void updateShuffleBoard(){
-  //  v_arcadeDrive = v_networkTableDriveMode.getBoolean(true);
-  //}
-  //This is untested on an actual robot, and needs to be demoed IRL
   public boolean isDriveModeArcade(){
     return v_networkTableDriveMode.getBoolean(true);
   }
@@ -98,8 +84,5 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
-    //Update Shuffleboard(Maybe I should stop making useless comments like these?)
-    //updateShuffleBoard();
   }
 }

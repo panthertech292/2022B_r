@@ -40,12 +40,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Motors
   public void setShooterMotorLowSpeed(double lowshooterspeed){
-    v_lowShooterSpeed = lowshooterspeed;
+    v_lowShooterSpeed = -lowshooterspeed;
     ShooterMotorLow.set(v_lowShooterSpeed);
   }
   public void setShooterMotorHighSpeed(double highshooterspeed){
-    v_highShooterSpeed = highshooterspeed;
-    ShooterMotorLow.set(v_highShooterSpeed);
+    v_highShooterSpeed = -highshooterspeed;
+    ShooterMotorHigh.set(v_highShooterSpeed);
   }
   //Senors & Encoders - Might need to create functions for position? Don't think I wil need them though.
   public double getShooterMotorLowEncoderVelocity(){

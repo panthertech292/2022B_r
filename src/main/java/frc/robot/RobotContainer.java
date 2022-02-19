@@ -44,6 +44,7 @@ public class RobotContainer {
 
   //Shooter Commands
   private final Command z_RunShooter = new RunShooter(s_ShooterSubsystem, ShooterConstants.kShooterLowSpeed, ShooterConstants.kShooterHighSpeed);
+  private final Command z_GetShooterRPMs = new GetShooterRPMs(s_ShooterSubsystem);
 
   //Lift Commands
   private final Command z_LiftExtend = new LiftExtend(s_LiftSubsystem);
@@ -87,11 +88,13 @@ public class RobotContainer {
 
     //Driver Controller Binds
     d_aButton.toggleWhenPressed(z_PickupArmDown);
+    
 
     //Operator Controller Binds
     o_leftBumper.whileHeld(z_LiftRetract);
     o_rightBumper.whileHeld(z_LiftExtend);
     o_aButton.whileHeld(z_RunShooter);
+    o_bButton.whenPressed(z_GetShooterRPMs);
   }
   public static double deadZoneCheck(double rawControllerInput){
     if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){

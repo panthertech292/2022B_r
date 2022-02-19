@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LiftBallSubsystem extends SubsystemBase {
   //Motors
-  private final CANSparkMax LiftBallHighMotor;
+  //private final CANSparkMax LiftBallHighMotor;
   private final CANSparkMax LiftBallLowMotor;
   //Vars
   private double v_liftBallLowSpeed;
@@ -21,16 +21,16 @@ public class LiftBallSubsystem extends SubsystemBase {
   public LiftBallSubsystem() {
     //Motors
     LiftBallLowMotor = new CANSparkMax(LiftBallConstants.kLiftBallLowMotor, MotorType.kBrushless);
-    LiftBallHighMotor = new CANSparkMax(LiftBallConstants.kLiftBallHighMotor, MotorType.kBrushless);
+    //LiftBallHighMotor = new CANSparkMax(LiftBallConstants.kLiftBallHighMotor, MotorType.kBrushless);
 
   }
   public void setLiftBallLowMotor(double liftballLowspeed){
-    v_liftBallLowSpeed = liftballLowspeed;
+    v_liftBallLowSpeed = -liftballLowspeed;
     LiftBallLowMotor.set(v_liftBallLowSpeed);
   }
   public void setLiftBallHighMotor(double liftballHighspeed){
     v_liftBallHighSpeed = liftballHighspeed;
-    LiftBallHighMotor.set(v_liftBallHighSpeed);
+    //LiftBallHighMotor.set(v_liftBallHighSpeed);
   }
 
   @Override

@@ -14,6 +14,7 @@ import frc.robot.commands.*;
 
 //Subsystems
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LiftBallSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.PickupSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -34,6 +35,7 @@ public class RobotContainer {
   private final PickupSubsystem s_PickupSubsystem = new PickupSubsystem();
   private final ShooterSubsystem s_ShooterSubsystem = new ShooterSubsystem();
   private final LiftSubsystem s_LiftSubsystem = new LiftSubsystem();
+  private final LiftBallSubsystem s_LiftBallSubsystem = new LiftBallSubsystem();
 
   //Drive Commands
   private final Command z_DriveTeleop = new DriveTeleop(s_DriverSubsystem); 
@@ -44,12 +46,14 @@ public class RobotContainer {
 
   //Shooter Commands
   private final Command z_RunShooter = new RunShooter(s_ShooterSubsystem, ShooterConstants.kShooterLowSpeed, ShooterConstants.kShooterHighSpeed);
-  private final Command z_GetShooterRPMs = new GetShooterRPMs(s_ShooterSubsystem);
 
   //Lift Commands
   private final Command z_LiftExtend = new LiftExtend(s_LiftSubsystem);
   private final Command z_LiftRetract = new LiftRetract(s_LiftSubsystem);
   private final Command z_LiftRotate = new LiftRotate(s_LiftSubsystem);
+  
+  //Lift Ball Commands
+  private final Command z_LiftBall = new LiftBall(s_LiftBallSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -94,7 +98,7 @@ public class RobotContainer {
     o_leftBumper.whileHeld(z_LiftRetract);
     o_rightBumper.whileHeld(z_LiftExtend);
     o_aButton.whileHeld(z_RunShooter);
-    o_bButton.whenPressed(z_GetShooterRPMs);
+    o_startButton.whileHeld(z_LiftBall);
   }
   public static double deadZoneCheck(double rawControllerInput){
     if (rawControllerInput > Constants.kControllerDeadZone || rawControllerInput < -Constants.kControllerDeadZone){

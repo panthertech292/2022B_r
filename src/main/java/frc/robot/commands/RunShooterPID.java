@@ -12,11 +12,14 @@ public class RunShooterPID extends CommandBase {
 
   private double v_shooterLowSpeed;
   private double v_shooterHighSpeed;
+  public double c_P, c_I, c_D, c_Iz, c_FF, c_MaxOutput, c_MinOutput, c_maxRPM; //PID
   /** Creates a new RunShooterPID. */
   public RunShooterPID(ShooterSubsystem s_ShooterSubsystem, double shooterlowspeed, double shooterhighspeed) {
     ShooterSubsystem = s_ShooterSubsystem;
     v_shooterLowSpeed = shooterlowspeed;
     v_shooterHighSpeed = shooterhighspeed;
+
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(s_ShooterSubsystem);
   }
@@ -28,7 +31,7 @@ public class RunShooterPID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ShooterSubsystem.setShooterMotorLowSpeed(v_shooterLowSpeed + ShooterSubsystem.getShooterMotorLowEncoderVelocity()*.01);
+  
   }
 
   // Called once the command ends or is interrupted.

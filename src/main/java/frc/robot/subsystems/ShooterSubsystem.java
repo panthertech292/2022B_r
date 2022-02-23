@@ -11,9 +11,11 @@ import frc.robot.Constants.ShooterConstants;
 //Motors
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 //Sensors & Encoders
 import com.revrobotics.RelativeEncoder;
+
 
 public class ShooterSubsystem extends SubsystemBase {
   //Motors
@@ -33,7 +35,13 @@ public class ShooterSubsystem extends SubsystemBase {
     //Motors
     ShooterMotorLow = new CANSparkMax(ShooterConstants.kShooterMotorLow, MotorType.kBrushless);
     ShooterMotorHigh = new CANSparkMax(ShooterConstants.kShooterMotorHigh, MotorType.kBrushless);
+    ShooterMotorLow.restoreFactoryDefaults();
+    ShooterMotorHigh.restoreFactoryDefaults();
+    ShooterMotorLow.setIdleMode(IdleMode.kCoast);
+    ShooterMotorHigh.setIdleMode(IdleMode.kCoast);
+    
     ShooterMotorLow.setInverted(true);
+    ShooterMotorHigh.setInverted(true);
 
     //Sensors & Encoders
     ShooterMotorLowEncoder = ShooterMotorLow.getEncoder();
@@ -46,7 +54,7 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterMotorLow.set(v_lowShooterSpeed);
   }
   public void setShooterMotorHighSpeed(double highshooterspeed){
-    v_highShooterSpeed = -highshooterspeed;
+    v_highShooterSpeed = highshooterspeed;
     ShooterMotorHigh.set(v_highShooterSpeed);
   }
   //Senors & Encoders - Might need to create functions for position? Don't think I wil need them though.
@@ -61,5 +69,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Motor RPM", getShooterMotorLowEncoderVelocity());
+    SmartDashboard.putNumber("Motor RPM HIGH", getShooterMotorHighEncoderVelocity());
   }
 }

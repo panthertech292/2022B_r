@@ -49,8 +49,8 @@ public final class Constants {
         public static final int kRightArmMotor = 22;
         
         //Speeds
-        public static final double kArmExtendSpeed = 0.7;
-        public static final double kArmRetractSpeed = -0.475;
+        public static final double kArmExtendSpeed = 0.6;
+        public static final double kArmRetractSpeed = -0.4;
     }
     public static final class LiftBallConstants{
         //Motors

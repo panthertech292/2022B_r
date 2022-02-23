@@ -7,6 +7,7 @@ import frc.robot.Constants.LiftBallConstants;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -22,10 +23,12 @@ public class LiftBallSubsystem extends SubsystemBase {
     //Motors
     LiftBallLowMotor = new CANSparkMax(LiftBallConstants.kLiftBallLowMotor, MotorType.kBrushless);
     //LiftBallHighMotor = new CANSparkMax(LiftBallConstants.kLiftBallHighMotor, MotorType.kBrushless);
-
+    LiftBallLowMotor.restoreFactoryDefaults();
+    LiftBallLowMotor.setIdleMode(IdleMode.kBrake);
+    LiftBallLowMotor.setInverted(true);
   }
   public void setLiftBallLowMotor(double liftballLowspeed){
-    v_liftBallLowSpeed = -liftballLowspeed;
+    v_liftBallLowSpeed = liftballLowspeed;
     LiftBallLowMotor.set(v_liftBallLowSpeed);
   }
   public void setLiftBallHighMotor(double liftballHighspeed){
